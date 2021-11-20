@@ -67,13 +67,13 @@ async function checkQrcode(cnvs, data) {
  * is still valid and if not, resize the logo down until
  * it becomes valid.
  * @param {string} data data which should be put into the qr code
- * @param {canvas.Canvas | canvas.Image | string} [logo=undefined]
- * logo as canvas or path (which will be loaded with canvas.loadImage())
+ * @param {Buffer | string} [logo=undefined]
+ * logo as png encoded buffer or path which will be loaded with canvas.loadImage()
  * @param {number} [sizeMultiplier=1] size multiplier as positive int to scale qr code
  * @param {number} [logoScale=0.4] coefficient of the logo size
  * @param {boolean} [check=true] qr code validator which scales down the logo automatically if qr code is not valid
  * 
- * @return  {canvas.Canvas | undefined}  canvas object with QR-Code and logo
+ * @return  {Buffer | undefined}  buffer with QR-Code and logo encoded as png
  */
 module.exports = async function qrlogo(data, logo, sizeMultiplier, logoScale, check) {
   if (!data) {
@@ -85,7 +85,7 @@ module.exports = async function qrlogo(data, logo, sizeMultiplier, logoScale, ch
   sizeMultiplier = Math.floor(sizeMultiplier);
   const qr = createQrcode(data, sizeMultiplier);
   if (!logo) {
-    return qr;
+    return qr.toBuffer();
   }
   if (typeof logo === 'string') {
     logo = await canvas.loadImage(logo);
@@ -94,14 +94,15 @@ module.exports = async function qrlogo(data, logo, sizeMultiplier, logoScale, ch
     logoScale = 0.4;
   }
   if (check === false) {
-    return await addLogo(qr, sizeMultiplier, logo, logoScale);
+    const result = await addLogo(qr, sizeMultiplier, logo, logoScale);
+    return result.toBuffer();
   }
   for (let i = logoScale; i > 0.04; i = i - 0.05) {
     const qrToCheck = await addLogo(qr, sizeMultiplier, logo, i);
     const check = await checkQrcode(qrToCheck, data);
     if (check) {
-      return qrToCheck;
+      return qrToCheck.toBuffer();
     }
   }
-  return qr;
+  return qr.toBuffer();
 }

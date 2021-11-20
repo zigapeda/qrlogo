@@ -22,7 +22,7 @@ const qrcode = await qrlogo('https://google.com');
 All parameters except data are optional.
 
 Logos can be added via passing second parameter
-as string or canvas object.
+as string or buffer.
 ```
 const qrcode = await qrlogo('https://google.com', 'logo.png');
 ```
@@ -39,6 +39,8 @@ renders not readable, qrlogo will scale down the
 coefficient with steps of 0.05 until it can be read.
 If you would like to turn off autoscale, you can pass
 `false` as fifth parameter.
+
+The QR-Code is then returned as buffer.
 
 ## License
 MIT License. Copyright (c) 2021 Daniel Elstner
