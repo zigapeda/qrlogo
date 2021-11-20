@@ -1,0 +1,29 @@
+{
+  "name": "qrlogo",
+  "version": "1.0.0",
+  "description": "Create QR Code with logo and validaton",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "qrcode": "^1.4.4",
+    "qrcode-reader": "^1.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zigapeda/qrlogo.git"
+  },
+  "keywords": [
+    "qr",
+    "code",
+    "logo"
+  ],
+  "author": "daniel.elstner@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zigapeda/qrlogo/issues"
+  },
+  "homepage": "https://github.com/zigapeda/qrlogo#readme"
+}
