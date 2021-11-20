@@ -6,12 +6,12 @@ qrlogo is an all in one function, to generate a QR-Code,
 scale it with an multiplier, insert a logo, check if it's
 still valid and if not, resize the logo down until it
 becomes valid.
-
+<!-- 
 ## Installation
 To install qrlogo and all of its dependencies run:
 ```
 npm install --save qrlogo
-```
+``` -->
 ## Usage:
 Basic usage to generate QR-Codes:
 ```
